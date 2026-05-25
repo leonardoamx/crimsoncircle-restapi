@@ -9,6 +9,8 @@ Route::get('/test', function (Request $request) {
     return "OK";
 });
 
+// @TODO: Move Auth endpoint from /api to /auth
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login',    [AuthController::class, 'login']);
 
