@@ -1,0 +1,29 @@
+### register
+POST http://127.0.0.1:8000/api/register
+
+{
+    "name": "Leonardo",
+    "email": "leonardoamx@outlook.com",
+    "password": "kYEhQgsvHo43DmtjUeb2PFre9rUyughV"
+}
+
+
+### login
+POST http://127.0.0.1:8000/api/login
+
+{
+    "email": "leonardoamx@outlook.com",
+    "password": "kYEhQgsvHo43DmtjUeb2PFre9rUyughV"
+}
+
+
+### me
+GET http://127.0.0.1:8000/api/me
+
+Authorization: Bearer {token}
+
+
+### logout
+POST http://127.0.0.1:8000/api/logout
+
+Authorization: Bearer {token}

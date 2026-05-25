@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
@@ -17,6 +18,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8'],
         ]);
 
+        // @TODO: Fix exception when email already exists
         $user = User::create([
             'name'     => $data['name'],
             'email'    => $data['email'],
@@ -61,7 +63,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $tokenId = $request->user()->currentAccessToken()->id;
+        PersonalAccessToken::find($tokenId)?->delete();
 
         return response()->json(['message' => 'Logged out']);
     }
