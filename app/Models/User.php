@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function viewHistories()
+    {
+        return $this->hasMany(ViewHistory::class);
+    }
 }
