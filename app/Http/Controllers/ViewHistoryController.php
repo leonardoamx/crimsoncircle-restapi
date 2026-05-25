@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreViewHistoryRequest;
 use App\Http\Resources\ViewHistoryResource;
 use App\Models\ViewHistory;
 use Illuminate\Http\Request;
@@ -26,11 +27,15 @@ class ViewHistoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreViewHistoryRequest $request)
     {
         $this->authorize('create', ViewHistory::class);
 
-        $viewHistory = ViewHistory::create($request->validated());
+        $data = $request->validated();
+
+        $data['user_id'] = $request->user()->id;
+
+        $viewHistory = ViewHistory::create($data);
 
         return new ViewHistoryResource($viewHistory);
     }
@@ -40,9 +45,8 @@ class ViewHistoryController extends Controller
      */
     public function show(string $id)
     {
-        $this->authorize('view', ViewHistory::class);
-
         $viewHistory = ViewHistory::with('user')->findOrFail($id);
+        $this->authorize('view', $viewHistory);
 
         return new ViewHistoryResource($viewHistory);
     }
@@ -50,12 +54,14 @@ class ViewHistoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreViewHistoryRequest $request, string $id)
     {
-        $this->authorize('update', ViewHistory::class);
-
         $viewHistory = ViewHistory::findOrFail($id);
-        $viewHistory->update($request->validated());
+        $this->authorize('update', $viewHistory);
+
+        $data = $request->validated();
+
+        $viewHistory->update($data);
 
         return new ViewHistoryResource($viewHistory);
     }
@@ -65,9 +71,10 @@ class ViewHistoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->authorize('delete', ViewHistory::class);
-
         $viewHistory = ViewHistory::findOrFail($id);
+
+        $this->authorize('delete', $viewHistory);
+
         $viewHistory->delete();
 
         return response()->noContent();

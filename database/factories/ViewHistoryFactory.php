@@ -18,7 +18,7 @@ class ViewHistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'item_id' => fake()->randomString(10),
+            'item_id' => fake()->randomNumber(3),
             'user_id' => \App\Models\User::factory(),
         ];
     }
