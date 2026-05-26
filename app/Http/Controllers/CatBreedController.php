@@ -14,7 +14,7 @@ class CatBreedController extends Controller
     {
         $response = Http::withHeaders([
             'x-api-key' => config('services.cat_api.token'),
-        ])->get(config('services.cat_api.url') . '/breeds');
+        ])->get(config('services.cat_api.url') . '/breeds', request()->query());
 
         return $response->json();
     }
