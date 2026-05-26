@@ -27,3 +27,15 @@ Authorization: Bearer {token}
 POST http://127.0.0.1:8000/api/logout
 
 Authorization: Bearer {token}
+
+
+# CatAPI
+
+### cats
+GET http://127.0.0.1:8000/api/cats/
+
+
+### breeds
+GET http://127.0.0.1:8000/api/cats/breeds
+
+XDEBUG_SESSION_START: VSCODE
