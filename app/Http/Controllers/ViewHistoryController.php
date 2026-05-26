@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreViewHistoryRequest;
 use App\Http\Resources\ViewHistoryResource;
 use App\Models\ViewHistory;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ViewHistoryController extends Controller
