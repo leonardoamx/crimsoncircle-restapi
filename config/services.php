@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'cat_api' => [
+        'url'   => env('CAT_API_URL'),
+        'token' => env('CAT_API_TOKEN'),
+    ],
+
 ];

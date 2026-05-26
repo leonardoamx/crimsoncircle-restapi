@@ -1,5 +1,9 @@
+# Check http-client.env.json for live hostname
+@hostname=http://127.0.0.1:8000
+
 ### register
-POST http://127.0.0.1:8000/api/register
+POST {{hostname}}/api/register
+Content-Type: application/json
 
 {
     "name": "Leonardo",
@@ -9,7 +13,8 @@ POST http://127.0.0.1:8000/api/register
 
 
 ### login
-POST http://127.0.0.1:8000/api/login
+POST {{hostname}}/api/login
+Content-Type: application/json
 
 {
     "email": "leonardoamx@outlook.com",
@@ -18,12 +23,26 @@ POST http://127.0.0.1:8000/api/login
 
 
 ### me
-GET http://127.0.0.1:8000/api/me
-
-Authorization: Bearer {token}
+GET {{hostname}}/api/me
+Authorization: Bearer [token]
 
 
 ### logout
-POST http://127.0.0.1:8000/api/logout
+POST {{hostname}}/api/logout
+Authorization: Bearer [token]
 
-Authorization: Bearer {token}
+
+# CatAPI
+
+### cats
+GET {{hostname}}/api/cats/
+
+### cats with page size
+GET {{hostname}}/api/cats/?limit=5&page=0
+
+### cats with page size and breed ID
+GET {{hostname}}/api/cats/?limit=5&page=0&breed_ids=abys
+
+
+### breeds
+GET {{hostname}}/api/cats/breeds
