@@ -12,7 +12,11 @@ class CatBreedController extends Controller
      */
     public function index()
     {
-        $response = Http::withHeaders([
+        // @TODO: Configure locally the SSL Certificate and remove verification bypass
+
+        $response = Http::withOptions([
+            'verify' => false,
+        ])->withHeaders([
             'x-api-key' => config('services.cat_api.token'),
         ])->get(config('services.cat_api.url') . '/breeds', request()->query());
 
